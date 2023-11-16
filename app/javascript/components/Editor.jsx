@@ -10,7 +10,6 @@ import { handleAjaxError } from '../helpers/helpers';
 const Editor = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  //const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {

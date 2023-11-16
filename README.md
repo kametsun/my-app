@@ -1,24 +1,47 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# version
+* ubuntu: 22.04.3 LTS
+* ruby: 3.2.2
+* Rails: 7.1.2
+* node.js: 21.1.0 
+* npm: 10.2.0
+* mysql: 8.0.35-0ubuntu0.22.04.1 for Linux on x86_64
 
-Things you may want to cover:
+# Getting Started
+1. Create Rails App
+```
+rails new my-app -j esbuild -d mysql
+```
 
-* Ruby version
+2. React install
+```
+npm i react react-dom
+```
 
-* System dependencies
+3. Change Package.json
+To rebundle everything when file changes are detected.
 
-* Configuration
+```
+// ./package.json
+"scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --loader:.js=jsx",
+    "watch": "esbuild app/javascript/*.* --watch --bundle --outdir=app/assets/builds --loader:.js=jsx"
+  }
+```
 
-* Database creation
+4. Change Procfile.dev
+```
+// ./Procfile.dev
+web: bin/rails s -p 3000
+js: npm run watch
+```
 
-* Database initialization
+5. Setting database<br>
+<br>
+Set database user and password in ./config/database.yml to match your environment
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+6. Start App!<br>
+```
+$ bin/dev
+```

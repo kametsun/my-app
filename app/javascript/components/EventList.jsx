@@ -41,7 +41,7 @@ const EventList = ({ events }) => {
 
       <input
         className='search'
-        placeholder='Search'
+        placeholder='検索'
         type='text'
         ref={searchInput}
         onKeyUp={updateSearchTerm}

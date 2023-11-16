@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'events/:id', to: 'site#index'
   get 'events/:id/edit', to: 'site#index'
 
+  get '/tick_tack_toes/index' => 'tick_tack_toes#index'
+
   namespace :api do
     resources :events, only: [:index, :show, :create, :destroy, :update]
   end
