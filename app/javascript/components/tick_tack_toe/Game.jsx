@@ -1,5 +1,7 @@
 import React , { useState } from "react";
 import { Board } from "./Board";
+import Header from "../Header";
+import "./tickTackToe.css";
 
 export default function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -17,7 +19,7 @@ export default function Game() {
         setCurrentMove(nextMove);
     }
 
-    const moves = history.map((squares, move) => {
+    const moves = history.map((squares ,move) => {
         let description;
 
         if (move > 0) {
@@ -37,10 +39,12 @@ export default function Game() {
 
     return (
         <div className="game">
+            <Header />
             <div className="game-board">
                 <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
+                <h3>Game Log</h3>
                 <ol>{ moves }</ol>
             </div>
         </div>

@@ -16,6 +16,7 @@ body {
 header {
     background: #f57011;
     height: 60px;
+    width: 100%;
 }
 
 header h1, header h1 a {

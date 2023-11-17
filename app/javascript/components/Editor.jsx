@@ -20,8 +20,6 @@ const Editor = () => {
         const data = await response.json();
         setEvents(data);
       } catch (error) {
-        //setIsError(true);
-        //console.error(error);
         handleAjaxError(error);
       }
 
@@ -48,11 +46,9 @@ const Editor = () => {
       const savedEvent = await response.json();
       const newEvents = [...events, savedEvent];
       setEvents(newEvents);
-      //window.alert("Event Added!");
       success("イベントを作成しました！");
       navigate(`/events/${savedEvent.id}`);
     } catch (error) {
-      //console.error(error);
       handleAjaxError(error);
     }
   }
@@ -70,12 +66,10 @@ const Editor = () => {
           throw Error(response.statusText);
         }
 
-        //window.alert("イベントを削除しました!");
         success("イベントを削除しました!");
         navigate("/events");
         setEvents(events.filter(event => event.id !== eventId));
       } catch (error) {
-        //console.log(error);
         handleAjaxError(error);
       }
     }
