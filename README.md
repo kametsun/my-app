@@ -1,4 +1,13 @@
-# README
+# Rails7 + React + esbuild
+
+This project used Rails7 and React. 
+Bundler for esbuild.
+
+## Technology stack
+
+* Rails 7
+* esbuild
+* React
 
 # version
 * ubuntu: 22.04.3 LTS
