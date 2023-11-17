@@ -86,7 +86,52 @@ header h1:hover {
   .eventForm {
     margin-top: 15px;
   }
+
+  .noteList {
+    background: #f6f6f6;
+    padding: 16px;
+  }
   
+  .noteList h2 {
+    font-size: 20px;
+    padding: 8px, 6px, 10px;
+  }
+  
+  .noteContainer {
+    font-size: 15px;
+    line-height: 35px;
+  }
+  
+  .noteContainer h2 {
+    margin-bottom: 10px;
+  }
+
+  .noteList li:hover, a.active {
+    background: #f8e5ce;
+  }
+
+  .noteList a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px, solid #dddddd;
+    padding: 8px, 6px, 10px;
+    outline: 0;
+  }
+
+  .noteList h2 > a {
+    color: #236fff;
+    font-size: 15px;
+    float: right;
+    font-weight: normal;
+    border-bottom: none;
+    padding: 0px;
+  }
+  
+  .noteForm {
+    margin-top: 15px;
+  }
+
   label > strong {
     display: inline-block;
     vertical-align: top;

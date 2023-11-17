@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   get 'events/:id', to: 'site#index'
   get 'events/:id/edit', to: 'site#index'
 
+  get 'notes', to: 'site#index'
+  get 'notes/new', to: 'site#index'
+  get 'notes/:id', to: 'site#index'
+  get 'notes/:id/edit', to: 'site#index'
+
   get '/tick_tack_toes/index' => 'tick_tack_toes#index'
 
   namespace :api do
+    resources :notes, only: [:index, :show, :create, :destroy, :update]
     resources :events, only: [:index, :show, :create, :destroy, :update]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

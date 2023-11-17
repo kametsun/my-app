@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-json = ActiveSupport::JSON.decode(File.read('db/seeds/events.json'))
+json = ActiveSupport::JSON.decode(File.read('db/seeds/notes.json'))
 json.each do |record|
-    Event.create!(record)
+    Note.create!(record)
 end

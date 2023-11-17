@@ -9,6 +9,9 @@ const Header = () => (
     <Link to={"/tick_tack_toes/index"}>
       <h1>三目並べ</h1>
     </Link>
+    <Link to={"/notes/"}>
+      <h1>Note</h1>
+    </Link>
   </header>
 );
 
