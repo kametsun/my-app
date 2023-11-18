@@ -4,13 +4,14 @@ import Header from "../Header";
 import NoteList from "./NoteList";
 import Note from "./Note";
 import NoteForm from "./NoteForm";
+import { success } from "../notice/notifications";
 import "../App.css";
+import { handleAjaxError } from "../helpers/helpers";
 
 
 const NoteEditor = () => {
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -27,8 +28,7 @@ const NoteEditor = () => {
                 setNotes(data);
 
             } catch (error) {
-                setIsError(true);
-                console.log(error);
+                handleAjaxError(error);
             }
 
             setIsLoading(false);
@@ -55,10 +55,10 @@ const NoteEditor = () => {
             const savedNote = await response.json();
             const newNotes = [ ...notes, savedNote];
             setNotes(newNotes);
-            window.alert("Note Added!");
+            success("ノートを作成しました！")
             navigate(`/notes/${savedNote.id}`);
         } catch (error) {
-            console.log(error);
+            handleAjaxError(error);
         }
     };
 
@@ -75,12 +75,12 @@ const NoteEditor = () => {
                     throw Error(response.statusText);
                 }
 
-                window.alert("ノートが削除されました！");
+                success("ノートが削除されました！");
                 navigate("/notes");
                 setNotes(notes.filter(note => note.id !== noteId));
 
             } catch (error) {
-                console.log(error);
+                handleAjaxError(error);
             }
         }
     };
@@ -89,7 +89,6 @@ const NoteEditor = () => {
         <>
             <Header />
             <div className="grid">
-                {isError && <p>Something went wrong. Check the conslole.</p>}
 
                 {isLoading ? (
                     <p>Loading...</p>

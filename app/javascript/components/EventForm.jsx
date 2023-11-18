@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Pikaday from 'pikaday'
 import "pikaday/css/pikaday.css";
 
-import { isEmptyObject, validateEvent, formatDate } from '../helpers/helpers';
+import { isEmptyObject, validateEvent, formatDate } from './helpers/helpers';
 import PropTypes from 'prop-types';
 import EventNotFound from './EventNotFound';
 

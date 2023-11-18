@@ -1,4 +1,4 @@
-import { error } from './notifications';
+import { error } from "../notice/notifications"
 
 //バリデーション
 export const isEmptyObject = obj => Object.keys(obj).length === 0;
