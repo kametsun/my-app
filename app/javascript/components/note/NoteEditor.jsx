@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../Header";
 import NoteList from "./NoteList";
 import Note from "./Note";
+import NoteForm from "./NoteForm";
 import "../App.css";
 
 
@@ -47,6 +48,7 @@ const NoteEditor = () => {
                             <NoteList notes={notes} />
 
                             <Routes>
+                                <Route path="new" element={<NoteForm />} />
                                 <Route path=":id" element={<Note notes={notes} />} />
                             </Routes>
                         </>
