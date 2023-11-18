@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
 const NoteList = ({ notes }) => {
-    const renderNotes = (noteArray) => {
-        noteArray.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    const [searchTerm, setSearchTerm] = useState("");
+    const searchInput = useRef(null);
 
-        return noteArray.map((note) => (
-            <li key={note.id}>
-                <NavLink to={`/notes/${note.id}`}>
-                    { note.title }
-                </NavLink>
-            </li>
-            ));
+    const updateSearchTerm = () => {
+        setSearchTerm(searchInput.current.value);
+    };
+
+    const matchSearchTerm = (obj) => {
+      const { id, body, ...rest } = obj;
+      return Object.values(rest).some(
+            (value) => value.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+        );  
+    };
+
+    const renderNotes = (noteArray) => {
+
+        return noteArray
+            .filter((el) => matchSearchTerm(el))
+            .map((note) => (
+                    <li key={`/notes/${note.id}`}>
+                        <NavLink to={`/notes/${note.id}`}>
+                            { note.title }
+                        </NavLink>
+                    </li>
+                ));
     };
 
     return (
@@ -23,17 +38,25 @@ const NoteList = ({ notes }) => {
                     New Note
                 </Link>
             </h2>
+
+            <input
+                className='search'
+                placeholder='検索'
+                type='text'
+                ref={searchInput}
+                onKeyUp={updateSearchTerm}
+            />
+
             <ul>{ renderNotes(notes) }</ul>
         </section>
         );
 };
 
 NoteList.propTypes = {
-notes: PropTypes.arrayOf(PropTypes.shape({
+    notes: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
     body: PropTypes.string,
-    updated_at: PropTypes.string,
 })).isRequired,
 };
 

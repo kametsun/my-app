@@ -42,7 +42,9 @@ class Api::NotesController < ApplicationController
     params.require(:note).permit(
       :id,
       :title,
-      :body
+      :body,
+      :created_at,
+      :updated_at
     )
   end
 end

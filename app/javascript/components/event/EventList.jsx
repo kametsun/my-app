@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
 const EventList = ({ events }) => {
-  const [searchTerm, setSearchTrm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const searchInput = useRef(null);
 
   const updateSearchTerm = () => {
-    setSearchTrm(searchInput.current.value);
+    setSearchTerm(searchInput.current.value);
   };
 
   const matchSearchTerm = (obj) => {
@@ -23,12 +23,12 @@ const EventList = ({ events }) => {
       .sort((a, b) => new Date(b.event_date) - new Date(a.event_date))
       .map((event) => (
         <li key={event.id}>
-        <NavLink to={`/events/${event.id}`}>
-          {event.event_date}
-          {' - '}
-          {event.event_type}
-        </NavLink>
-      </li>
+          <NavLink to={`/events/${event.id}`}>
+            {event.event_date}
+            {' - '}
+            {event.event_type}
+          </NavLink>
+        </li>
         ));
   };
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
-import EventNotFound from './EventNotFound';
+import NotFound from '../NotFound';
 
 const Event = ({ events, onDelete }) => {
   const { id } = useParams();
   const event = events.find((e) => e.id === Number(id));
 
   if (!event) {
-    return <EventNotFound />;
+    return <NotFound  model={"イベント"}/>;
   }
 
   return (

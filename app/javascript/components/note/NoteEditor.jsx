@@ -12,21 +12,17 @@ import { handleAjaxError } from "../helpers/helpers";
 const NoteEditor = () => {
     const [notes, setNotes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await window.fetch("/api/notes");
-
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                
                 const data = await response.json();
                 setNotes(data);
-
             } catch (error) {
                 handleAjaxError(error);
             }
@@ -85,11 +81,38 @@ const NoteEditor = () => {
         }
     };
 
+    const updateNote = async ( updatedNote ) => {
+        try {
+            const response = await window.fetch(
+                `/api/notes/${updatedNote.id}`,
+                {
+                    method: "PUT",
+                    body: JSON.stringify(updatedNote),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                },
+                );
+
+                if (!response.ok) throw Error(response.statusText);
+
+                const newNotes = notes;
+                const idx = newNotes.findIndex((note) => note.id === updatedNote.id);
+                newNotes[idx] = updatedNote;
+                setNotes(newNotes);
+
+                success("ノートの編集に成功しました!");
+                navigate(`/notes/${updatedNote.id}`);
+        } catch (error) {
+            handleAjaxError(error);
+        }
+    };
+
     return (
         <>
             <Header />
             <div className="grid">
-
                 {isLoading ? (
                     <p>Loading...</p>
                     ) : (
@@ -97,8 +120,21 @@ const NoteEditor = () => {
                             <NoteList notes={notes} />
 
                             <Routes>
-                                <Route path="new" element={<NoteForm onSave={addNote}/>} />
-                                <Route path=":id" element={<Note notes={notes} onDelete={deleteNote} />} />
+                                <Route 
+                                    path="new"
+                                    element={<NoteForm onSave={addNote} 
+                                />}
+
+                                />
+                                <Route 
+                                    path=":id" 
+                                    element={<Note notes={notes} 
+                                    onDelete={deleteNote} />} 
+                                />
+                                <Route 
+                                    path=":id/edit"
+                                    element={<NoteForm notes={notes} onSave={updateNote} />} 
+                                />
                             </Routes>
                         </>
                     )}

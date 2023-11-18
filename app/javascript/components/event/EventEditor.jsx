@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Header';
 import Event from './Event';
 import EventList from './EventList';
 import EventForm from './EventForm';
-import { success } from './notice/notifications';
-import { handleAjaxError } from './helpers/helpers';
+import { success } from '../notice/notifications';
+import { handleAjaxError } from '../helpers/helpers';
 
-const Editor = () => {
+const EventEditor = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -114,7 +114,8 @@ const Editor = () => {
             <EventList events={events} />
 
             <Routes>
-              <Route path="new" element={<EventForm onSave={addEvent} />} 
+              <Route path="new" element={<EventForm onSave={addEvent} 
+            />} 
             />
 
             <Route
@@ -134,4 +135,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default EventEditor;
