@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { isEmptyObject, validateNote } from "./helpers/helpers";
 
-const NoteForm = () => {
+const NoteForm = ({ onSave }) => {
     const [note, setNote] = useState({
         title: "",
         body: "",
@@ -12,8 +13,9 @@ const NoteForm = () => {
     handleInputChange = (e) => {
         const { target } = e;
         const { name } = target;
+        const value = target.value;
 
-        setNote({ ...note, [name]: value });
+        updateNote(name, value);
     };    
 
     const renderErrors = () => {
@@ -40,8 +42,13 @@ const NoteForm = () => {
         if (!isEmptyObject(errors)) {
             setFormErrors(errors);
         } else {
+            onSave(note);
             console.log(note);
         }
+    };
+
+    const updateNote = (key, value) => {
+        setNote((prevNote) => ({ ...prevNote, [key]: value }));
     };
 
     return (
@@ -67,6 +74,10 @@ const NoteForm = () => {
             </form>
         </section>
         );
+};
+
+NoteForm.prototype = {
+    onSave: PropTypes.func.isRequired,
 };
 
 export default NoteForm;

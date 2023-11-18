@@ -14,7 +14,7 @@ class Api::NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      render json: @note, status: created  
+      render json: @note, status: :created
     else
       render json: @note.errors, status: :unprocessable_entity
     end
